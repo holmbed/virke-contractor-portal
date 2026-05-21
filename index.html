@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>virke — Job Ticket</title>
+  <title>virke — Contractor Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,7 +39,6 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── HEADER ── */
     header {
       display: flex;
       align-items: center;
@@ -91,14 +89,12 @@
     .badge-cancelled { background: var(--red-light);    color: var(--red); }
     .badge-cancelled .badge-dot { background: var(--red); }
 
-    /* ── MAIN ── */
     main {
       max-width: 560px;
       margin: 0 auto;
       padding: 40px 20px 100px;
     }
 
-    /* ── LOADING / ERROR ── */
     .centered {
       display: flex;
       flex-direction: column;
@@ -128,7 +124,120 @@
       color: var(--red);
     }
 
-    /* ── CONTRACTOR CARD ── */
+    /* LOGIN */
+    .login-wrap { max-width: 400px; margin: 0 auto; padding: 48px 0; }
+
+    .login-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px; font-weight: 500;
+      color: var(--text); margin-bottom: 10px;
+    }
+
+    .login-sub { font-size: 14px; color: var(--text2); line-height: 1.65; margin-bottom: 28px; }
+
+    .login-input {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--sep);
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .login-input:focus { border-color: var(--accent-focus); }
+    .login-input::placeholder { color: var(--text3); }
+
+    .login-input.code-input {
+      font-size: 26px;
+      letter-spacing: 10px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .login-error { font-size: 13px; color: var(--red); margin-bottom: 12px; display: none; }
+
+    .login-back {
+      background: transparent;
+      border: none;
+      color: var(--text3);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+      padding: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    /* PAYMENT GATE */
+    .payment-gate {
+      background: var(--bg2);
+      border: 1px solid var(--sep);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .payment-gate-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 500;
+      color: var(--text); margin-bottom: 24px;
+    }
+
+    .payment-gate-fee {
+      font-size: 44px; font-weight: 500;
+      color: var(--text); margin-bottom: 4px;
+    }
+
+    .payment-gate-fee-label {
+      font-size: 11px; color: var(--text3);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .address-blur {
+      background: var(--bg3);
+      border: 1px solid var(--sep);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .address-blur-label {
+      font-size: 10px; color: var(--text3);
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px;
+    }
+
+    .address-blur-value {
+      font-size: 14px; color: var(--text);
+      filter: blur(5px); user-select: none;
+    }
+
+    .lock-icon {
+      font-size: 15px; color: var(--text3); flex-shrink: 0;
+    }
+
+    .payment-gate-sub {
+      font-size: 13px; color: var(--text3);
+      line-height: 1.75; margin-bottom: 24px;
+    }
+
+    .payment-gate-note {
+      font-size: 12px; color: var(--text3);
+      text-align: center; margin-top: 12px; line-height: 1.6;
+    }
+
+    /* JOB CARDS */
     .contractor-card {
       background: var(--bg2);
       border: 1px solid var(--sep);
@@ -148,44 +257,32 @@
       border: 1px solid var(--sep);
       display: flex; align-items: center; justify-content: center;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      color: var(--text2);
-      flex-shrink: 0;
+      font-size: 20px; color: var(--text2); flex-shrink: 0;
     }
 
     .contractor-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 3px;
+      font-size: 22px; font-weight: 500;
+      color: var(--text); margin-bottom: 3px;
     }
 
     .contractor-label {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text3);
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--text3);
     }
 
-    /* ── CARDS ── */
     .card {
       background: var(--bg2);
       border: 1px solid var(--sep);
       border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 20px;
+      overflow: hidden; margin-bottom: 20px;
       animation: fadeUp 0.4s ease both;
     }
 
     .card-title {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text3);
-      padding: 16px 20px 12px;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text3); padding: 16px 20px 12px;
     }
 
     .detail-row {
@@ -197,60 +294,34 @@
       gap: 16px;
     }
 
-    .detail-label {
-      font-size: 13px;
-      color: var(--text3);
-      flex-shrink: 0;
-    }
-
-    .detail-value {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      text-align: right;
-      max-width: 60%;
-    }
-
+    .detail-label { font-size: 13px; color: var(--text3); flex-shrink: 0; }
+    .detail-value { font-size: 13px; font-weight: 500; color: var(--text); text-align: right; max-width: 60%; }
     .detail-value.green { color: var(--accent); }
-    .detail-value.gold  { color: var(--gold); }
 
-    /* ── DESCRIPTION BOX ── */
     .description-box {
       background: var(--bg2);
       border: 1px solid var(--sep);
       border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 20px;
+      padding: 20px; margin-bottom: 20px;
       animation: fadeUp 0.4s ease both;
     }
 
-    .description-box p {
-      font-size: 15px;
-      line-height: 1.75;
-      color: var(--text2);
-    }
+    .description-box p { font-size: 15px; line-height: 1.75; color: var(--text2); }
 
-    /* ── PAYMENT NOTE ── */
-    .escrow-note {
-      background: transparent;
+    .info-note {
       border: 1px solid var(--sep);
       border-radius: var(--radius);
-      padding: 13px 18px;
-      margin-bottom: 20px;
-      font-size: 12px;
-      color: var(--text3);
-      line-height: 1.6;
-      text-align: center;
+      padding: 13px 18px; margin-bottom: 20px;
+      font-size: 12px; color: var(--text3);
+      line-height: 1.6; text-align: center;
       animation: fadeUp 0.4s ease both;
     }
 
-    /* ── FUND REQUEST FORM ── */
     .fund-form {
       background: var(--bg2);
       border: 1px solid var(--sep);
       border-radius: var(--radius);
-      padding: 22px 20px;
-      margin-bottom: 20px;
+      padding: 22px 20px; margin-bottom: 20px;
       display: none;
       animation: fadeUp 0.3s ease both;
     }
@@ -259,12 +330,9 @@
 
     .fund-form label {
       display: block;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 8px;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--text3); margin-bottom: 8px;
     }
 
     .fund-form input,
@@ -276,33 +344,21 @@
       padding: 12px 14px;
       color: var(--text);
       font-family: 'Jost', sans-serif;
-      font-size: 15px;
-      margin-bottom: 16px;
-      outline: none;
-      transition: border-color 0.2s;
+      font-size: 15px; margin-bottom: 16px;
+      outline: none; transition: border-color 0.2s;
     }
 
     .fund-form input:focus,
     .fund-form textarea:focus { border-color: var(--accent-focus); }
-
     .fund-form textarea { resize: vertical; min-height: 80px; }
 
-    /* ── BUTTONS ── */
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      animation: fadeUp 0.5s ease both;
-    }
+    .btn-group { display: flex; flex-direction: column; gap: 10px; animation: fadeUp 0.5s ease both; }
 
     button {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--radius);
-      border: none;
+      width: 100%; padding: 14px;
+      border-radius: var(--radius); border: none;
       font-family: 'Jost', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 15px; font-weight: 500;
       cursor: pointer;
       transition: opacity 0.2s, transform 0.1s;
       letter-spacing: 0.01em;
@@ -311,74 +367,28 @@
     button:active   { transform: scale(0.99); }
     button:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    .btn-complete,
-    .btn-submit {
-      background: var(--accent);
-      color: var(--bg);
-    }
-    .btn-complete:hover,
-    .btn-submit:hover { opacity: 0.88; }
+    .btn-primary, .btn-complete, .btn-submit { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover, .btn-complete:hover, .btn-submit:hover { opacity: 0.88; }
 
-    .btn-fund {
-      background: var(--gold-light);
-      color: var(--gold);
-      border: 1px solid var(--gold-border);
-    }
+    .btn-fund { background: var(--gold-light); color: var(--gold); border: 1px solid var(--gold-border); }
     .btn-fund:hover { opacity: 0.88; }
 
-    .btn-cancel,
-    .btn-close {
-      background: transparent;
-      color: var(--text3);
-      border: 1px solid var(--sep);
-      font-size: 14px;
-    }
-    .btn-cancel:hover,
-    .btn-close:hover { color: var(--text2); }
+    .btn-cancel, .btn-close { background: transparent; color: var(--text3); border: 1px solid var(--sep); font-size: 14px; }
+    .btn-cancel:hover, .btn-close:hover { color: var(--text2); }
     .btn-close { margin-top: 4px; }
 
-    /* ── SUCCESS STATE ── */
-    .success-wrap {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 48px 20px;
-      gap: 14px;
-    }
-
+    .success-wrap { display: none; flex-direction: column; align-items: center; text-align: center; padding: 48px 20px; gap: 14px; }
     .success-wrap.show { display: flex; }
 
-    .success-icon {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      color: var(--accent);
-    }
+    .success-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent); }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; color: var(--text); }
+    .success-sub { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 280px; }
 
-    .success-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .success-sub {
-      font-size: 14px;
-      color: var(--text2);
-      line-height: 1.65;
-      max-width: 280px;
-    }
-
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── TOAST ── */
     .toast {
       position: fixed;
       bottom: 24px; left: 50%;
@@ -387,26 +397,21 @@
       border: 1px solid var(--sep);
       border-radius: 980px;
       padding: 11px 22px;
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 13px; font-weight: 500;
       color: var(--text);
       transition: transform 0.3s ease;
-      z-index: 999;
-      white-space: nowrap;
+      z-index: 999; white-space: nowrap;
     }
 
     .toast.show    { transform: translateX(-50%) translateY(0); }
-    .toast.error   { border-color: var(--red-border);   color: var(--red); }
+    .toast.error   { border-color: var(--red-border); color: var(--red); }
     .toast.success { border-color: var(--accent-focus); color: var(--accent); }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    virke
-    <span>Contractor Portal</span>
-  </div>
+  <div class="logo">virke<span>Contractor Portal</span></div>
   <div id="statusBadge" class="badge badge-pending">
     <div class="badge-dot"></div>
     <span>Loading...</span>
@@ -414,23 +419,67 @@
 </header>
 
 <main>
-  <!-- Loading -->
+
   <div id="loadingView" class="centered">
     <div class="spinner"></div>
-    <p style="color: var(--text2); font-size: 14px;">Loading your job...</p>
+    <p style="color:var(--text2);font-size:14px;">Loading your job...</p>
   </div>
 
-  <!-- Error -->
   <div id="errorView" class="centered" style="display:none">
     <div class="error-icon">!</div>
     <p style="font-family:'Cormorant Garamond',serif;font-size:24px;">Job not found</p>
     <p style="color:var(--text2);font-size:14px;max-width:260px;line-height:1.6;">This link may be invalid or the job may have been removed.</p>
   </div>
 
-  <!-- Job content -->
+  <!-- LOGIN: PHONE -->
+  <div id="loginPhoneView" style="display:none">
+    <div class="login-wrap">
+      <div class="login-title">Verify your identity.</div>
+      <div class="login-sub">Enter the phone number on your virke account to access this job.</div>
+      <p class="login-error" id="phoneError">Phone not found. Contact hello@virke.us to sign up.</p>
+      <input type="tel" class="login-input" id="phoneInput" placeholder="(206) 555-0100" />
+      <button class="btn-primary" onclick="sendCode()">Send code</button>
+    </div>
+  </div>
+
+  <!-- LOGIN: CODE -->
+  <div id="loginCodeView" style="display:none">
+    <div class="login-wrap">
+      <div class="login-title">Check your phone.</div>
+      <div class="login-sub" id="codeSentSub">We sent a 6-digit code to your number.</div>
+      <p class="login-error" id="codeError">Incorrect code. Try again.</p>
+      <input type="tel" class="login-input code-input" id="codeInput" placeholder="000000" maxlength="6" />
+      <button class="btn-primary" onclick="verifyCode()">Verify</button>
+      <button class="login-back" onclick="backToPhone()">← Change number</button>
+    </div>
+  </div>
+
+  <!-- PAYMENT GATE -->
+  <div id="paymentGateView" style="display:none">
+    <div class="payment-gate">
+      <div class="payment-gate-title">Unlock this job.</div>
+      <div class="payment-gate-fee">$10</div>
+      <div class="payment-gate-fee-label">one-time job fee</div>
+      <div class="address-blur">
+        <div>
+          <div class="address-blur-label">Customer address</div>
+          <div class="address-blur-value" id="blurredAddress">1234 Maple Street, Seattle WA</div>
+        </div>
+        <div class="lock-icon">🔒</div>
+      </div>
+      <div class="payment-gate-sub">
+        virke has already done the work — we categorized the job, qualified the customer, and matched it to you specifically. The $10 unlocks the full address so you can show up ready. This job is yours. No competition.
+      </div>
+      <button class="btn-primary" onclick="chargeContractor()">Pay $10 and unlock address</button>
+    </div>
+    <p class="payment-gate-note">
+      If the $10 doesn't feel worth it for an exclusive confirmed job — no hard feelings. We'll move to the next contractor.
+    </p>
+  </div>
+
+  <!-- JOB VIEW -->
   <div id="jobView" style="display:none">
 
-    <!-- Contractor identity -->
     <div class="contractor-card">
       <div class="contractor-avatar" id="contractorInitial">V</div>
       <div>
@@ -439,39 +488,21 @@
       </div>
     </div>
 
-    <!-- Job details -->
     <div class="card">
       <div class="card-title">Job details</div>
-      <div class="detail-row">
-        <span class="detail-label">Service</span>
-        <span class="detail-value" id="serviceType">—</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Address</span>
-        <span class="detail-value" id="jobAddress">—</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Scheduled</span>
-        <span class="detail-value green" id="jobSlot">—</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Submitted</span>
-        <span class="detail-value" id="jobDate">—</span>
-      </div>
+      <div class="detail-row"><span class="detail-label">Service</span><span class="detail-value" id="serviceType">—</span></div>
+      <div class="detail-row"><span class="detail-label">Address</span><span class="detail-value" id="jobAddress">—</span></div>
+      <div class="detail-row"><span class="detail-label">Scheduled</span><span class="detail-value green" id="jobSlot">—</span></div>
+      <div class="detail-row"><span class="detail-label">Submitted</span><span class="detail-value" id="jobDate">—</span></div>
     </div>
 
-    <!-- Issue description -->
     <div class="description-box">
       <div class="card-title" style="padding:0 0 10px">Customer's issue</div>
       <p id="jobDescription">—</p>
     </div>
 
-    <!-- Escrow note -->
-    <div class="escrow-note">
-      Payment is held in escrow and released to you when the job is marked complete.
-    </div>
+    <div class="info-note">Mark the job complete below once the work is done. The customer will be notified.</div>
 
-    <!-- Fund request form -->
     <div class="fund-form" id="fundForm">
       <div class="card-title" style="padding:0 0 14px">Request additional funds</div>
       <label>Amount (USD)</label>
@@ -482,14 +513,12 @@
       <button class="btn-close" onclick="toggleFundForm()">Cancel</button>
     </div>
 
-    <!-- Success state -->
     <div class="success-wrap" id="successView">
       <div class="success-icon">✓</div>
       <div class="success-title" id="successTitle">Done.</div>
       <div class="success-sub" id="successSub">Your update has been saved.</div>
     </div>
 
-    <!-- Actions -->
     <div class="btn-group" id="actionButtons">
       <button class="btn-complete" onclick="markComplete()">Mark job complete</button>
       <button class="btn-fund" onclick="toggleFundForm()">Request additional funds</button>
@@ -497,6 +526,7 @@
     </div>
 
   </div>
+
 </main>
 
 <div class="toast" id="toast"></div>
@@ -508,10 +538,18 @@
     hvac: 'HVAC', appliance: 'Appliance Repair', general: 'Home Repair',
   };
 
-  // Get job ID from URL: /job/abc123
   var pathParts = window.location.pathname.split('/');
   var jobId = pathParts[pathParts.length - 1];
   var jobData = null;
+  var contractorId = null;
+  var verifiedPhone = null;
+
+  var VIEWS = ['loadingView','errorView','loginPhoneView','loginCodeView','paymentGateView','jobView'];
+
+  function show(id) {
+    VIEWS.forEach(function(v) { document.getElementById(v).style.display = 'none'; });
+    document.getElementById(id).style.display = 'block';
+  }
 
   function showToast(msg, type) {
     var t = document.getElementById('toast');
@@ -542,47 +580,96 @@
     });
   }
 
-  async function loadJob() {
-    if (!jobId || jobId === 'job') {
-      document.getElementById('loadingView').style.display = 'none';
-      document.getElementById('errorView').style.display = 'flex';
-      return;
-    }
-
+  async function init() {
+    if (!jobId || jobId === 'job') { show('errorView'); return; }
     try {
       var res = await fetch(BACKEND + '/service_requests/' + jobId);
-      if (!res.ok) throw new Error('Not found');
+      if (!res.ok) throw new Error();
       jobData = await res.json();
-
-      document.getElementById('loadingView').style.display = 'none';
-      document.getElementById('jobView').style.display = 'block';
-
-      var name = jobData.contractor_name || 'Your Pro';
-      document.getElementById('contractorName').textContent = name;
-      document.getElementById('contractorInitial').textContent = name.charAt(0).toUpperCase();
-      document.getElementById('serviceType').textContent = SERVICE_LABELS[jobData.service_type] || 'Home Repair';
-      document.getElementById('jobAddress').textContent = jobData.address || 'Address not provided';
-      document.getElementById('jobSlot').textContent = jobData.contractor_slot || 'TBD';
-      document.getElementById('jobDescription').textContent = jobData.description || 'No description provided.';
-      document.getElementById('jobDate').textContent = formatDate(jobData.created_at);
-
       setStatus(jobData.status);
+      document.getElementById('blurredAddress').textContent = jobData.address || 'Seattle, WA';
+      show('loginPhoneView');
+    } catch (e) { show('errorView'); }
+  }
 
-      // Hide actions if already completed or cancelled
-      if (['completed', 'cancelled'].includes(jobData.status)) {
-        document.getElementById('actionButtons').style.display = 'none';
-        showSuccess(
-          jobData.status === 'completed' ? 'Job complete.' : 'Job cancelled.',
-          jobData.status === 'completed'
-            ? 'Payment has been released. Thanks for your work.'
-            : 'The customer has been notified and refunded.'
-        );
-      }
+  async function sendCode() {
+    var phone = document.getElementById('phoneInput').value.trim();
+    if (!phone) return;
+    document.getElementById('phoneError').style.display = 'none';
+    var btn = document.querySelector('#loginPhoneView button');
+    btn.disabled = true; btn.textContent = 'Sending...';
+    try {
+      var res = await fetch(BACKEND + '/contractors/send-code', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone }),
+      });
+      if (!res.ok) throw new Error();
+      verifiedPhone = phone;
+      document.getElementById('codeSentSub').textContent = 'We sent a 6-digit code to ' + phone + '.';
+      show('loginCodeView');
+    } catch (e) { document.getElementById('phoneError').style.display = 'block'; }
+    btn.disabled = false; btn.textContent = 'Send code';
+  }
 
+  function backToPhone() {
+    document.getElementById('codeError').style.display = 'none';
+    document.getElementById('codeInput').value = '';
+    show('loginPhoneView');
+  }
+
+  async function verifyCode() {
+    var code = document.getElementById('codeInput').value.trim();
+    if (!code) return;
+    document.getElementById('codeError').style.display = 'none';
+    var btn = document.querySelector('#loginCodeView button');
+    btn.disabled = true; btn.textContent = 'Verifying...';
+    try {
+      var res = await fetch(BACKEND + '/contractors/verify-code', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: verifiedPhone, code: code }),
+      });
+      var data = await res.json();
+      if (!res.ok || !data.contractor_id) throw new Error();
+      contractorId = data.contractor_id;
+      if (jobData.contractor_fee_paid) { renderJobView(); } else { show('paymentGateView'); }
+    } catch (e) { document.getElementById('codeError').style.display = 'block'; }
+    btn.disabled = false; btn.textContent = 'Verify';
+  }
+
+  async function chargeContractor() {
+    var btn = document.querySelector('#paymentGateView button');
+    btn.disabled = true; btn.textContent = 'Processing...';
+    try {
+      var res = await fetch(BACKEND + '/payments/charge-contractor', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ request_id: jobId, contractor_id: contractorId }),
+      });
+      if (!res.ok) throw new Error();
+      renderJobView();
     } catch (e) {
-      document.getElementById('loadingView').style.display = 'none';
-      document.getElementById('errorView').style.display = 'flex';
+      showToast('Payment failed. Try again.', 'error');
+      btn.disabled = false; btn.textContent = 'Pay $10 and unlock address';
     }
+  }
+
+  function renderJobView() {
+    var name = jobData.contractor_name || 'Your Pro';
+    document.getElementById('contractorName').textContent = name;
+    document.getElementById('contractorInitial').textContent = name.charAt(0).toUpperCase();
+    document.getElementById('serviceType').textContent = SERVICE_LABELS[jobData.service_type] || 'Home Repair';
+    document.getElementById('jobAddress').textContent = jobData.address || 'Address not available';
+    document.getElementById('jobSlot').textContent = jobData.contractor_slot || 'TBD';
+    document.getElementById('jobDescription').textContent = jobData.description || 'No description provided.';
+    document.getElementById('jobDate').textContent = formatDate(jobData.created_at);
+    setStatus(jobData.status);
+    if (['completed','cancelled'].includes(jobData.status)) {
+      document.getElementById('actionButtons').style.display = 'none';
+      showSuccess(
+        jobData.status === 'completed' ? 'Job complete.' : 'Job cancelled.',
+        jobData.status === 'completed' ? 'Thanks for your work.' : "The customer has been notified. We'll find them another pro."
+      );
+    }
+    show('jobView');
   }
 
   function showSuccess(title, sub) {
@@ -592,65 +679,56 @@
   }
 
   async function markComplete() {
-    if (!confirm('Mark this job as complete? This will release payment to you.')) return;
+    if (!confirm('Mark this job as complete?')) return;
     try {
-      var res = await fetch(BACKEND + '/payments/release-escrow', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ request_id: jobId }),
+      var res = await fetch(BACKEND + '/jobs/' + jobId + '/complete', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
       });
       if (!res.ok) throw new Error();
       document.getElementById('actionButtons').style.display = 'none';
-      showSuccess('Job complete.', 'Payment has been released to you. Thanks for your work.');
+      showSuccess('Job complete.', 'Thanks for your work. The customer has been notified.');
       setStatus('completed');
-    } catch (e) {
-      showToast('Something went wrong. Try again.', 'error');
-    }
+    } catch (e) { showToast('Something went wrong. Try again.', 'error'); }
   }
 
   async function cancelJob() {
-    if (!confirm('Are you sure you can\'t do this job? The customer will be notified and refunded.')) return;
+    if (!confirm("Are you sure you can't do this job?")) return;
     try {
       var res = await fetch(BACKEND + '/jobs/' + jobId + '/cancel', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
       });
       if (!res.ok) throw new Error();
       document.getElementById('actionButtons').style.display = 'none';
-      showSuccess('Job cancelled.', 'The customer has been notified. We\'ll find them another pro.');
+      showSuccess('Job cancelled.', "The customer has been notified. We'll find them another pro.");
       setStatus('cancelled');
-    } catch (e) {
-      showToast('Something went wrong. Try again.', 'error');
-    }
+    } catch (e) { showToast('Something went wrong. Try again.', 'error'); }
   }
 
-  function toggleFundForm() {
-    var form = document.getElementById('fundForm');
-    form.classList.toggle('open');
-  }
+  function toggleFundForm() { document.getElementById('fundForm').classList.toggle('open'); }
 
   async function submitFundRequest() {
     var amount = parseFloat(document.getElementById('fundAmount').value);
     var reason = document.getElementById('fundReason').value.trim();
-
     if (!amount || amount < 1) { showToast('Enter a valid amount.', 'error'); return; }
     if (!reason) { showToast('Please provide a reason.', 'error'); return; }
-
     try {
       var res = await fetch(BACKEND + '/jobs/' + jobId + '/fund-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: Math.round(amount * 100), reason: reason }),
       });
       if (!res.ok) throw new Error();
       toggleFundForm();
       showToast('Request sent to customer.', 'success');
-    } catch (e) {
-      showToast('Could not send request. Try again.', 'error');
-    }
+    } catch (e) { showToast('Could not send request. Try again.', 'error'); }
   }
 
-  loadJob();
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    if (document.getElementById('loginPhoneView').style.display !== 'none') sendCode();
+    if (document.getElementById('loginCodeView').style.display !== 'none') verifyCode();
+  });
+
+  init();
 </script>
 </body>
 </html>
