@@ -631,7 +631,7 @@
       var data = await res.json();
       if (!res.ok || !data.contractor_id) throw new Error();
       contractorId = data.contractor_id;
-      if (jobData.contractor_fee_paid) { renderJobView(); } else { show('paymentGateView'); }
+      renderJobView();
     } catch (e) { document.getElementById('codeError').style.display = 'block'; }
     btn.disabled = false; btn.textContent = 'Verify';
   }
@@ -732,3 +732,4 @@
 </script>
 </body>
 </html>
+
