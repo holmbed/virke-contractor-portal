@@ -412,10 +412,7 @@
 
 <header>
   <div class="logo">virke<span>Contractor Portal</span></div>
-  <div id="statusBadge" class="badge badge-pending">
-    <div class="badge-dot"></div>
-    <span>Loading...</span>
-  </div>
+  <div id="statusBadge" style="display:none"></div>
 </header>
 
 <main>
@@ -436,7 +433,7 @@
     <div class="login-wrap">
       <div class="login-title">Verify your identity.</div>
       <div class="login-sub">Enter the phone number on your virke account to access this job.</div>
-      <p class="login-error" id="phoneError">Phone not found. Contact hello@virke.us to sign up.</p>
+      <p class="login-error" id="phoneError">Phone not found. Contact daniel@virke.us to sign up.</p>
       <input type="tel" class="login-input" id="phoneInput" placeholder="(206) 555-0100" />
       <button class="btn-primary" onclick="sendCode()">Send code</button>
     </div>
@@ -458,7 +455,7 @@
   <div id="paymentGateView" style="display:none">
     <div class="payment-gate">
       <div class="payment-gate-title">Unlock this job.</div>
-      <div class="payment-gate-fee">$10</div>
+      <div class="payment-gate-fee">$20</div>
       <div class="payment-gate-fee-label">one-time job fee</div>
       <div class="address-blur">
         <div>
@@ -468,12 +465,12 @@
         <div class="lock-icon">🔒</div>
       </div>
       <div class="payment-gate-sub">
-        virke has already done the work — we categorized the job, qualified the customer, and matched it to you specifically. The $10 unlocks the full address so you can show up ready. This job is yours. No competition.
+        virke has already done the work — we categorized the job, qualified the customer, and matched it to you specifically. The $20 unlocks the full address so you can show up ready. This job is yours. No competition.
       </div>
-      <button class="btn-primary" onclick="chargeContractor()">Pay $10 and unlock address</button>
+      <button class="btn-primary" onclick="chargeContractor()">Pay $20 and unlock address</button>
     </div>
     <p class="payment-gate-note">
-      If the $10 doesn't feel worth it for an exclusive confirmed job — no hard feelings. We'll move to the next contractor.
+      If the $20 doesn't feel worth it for an exclusive confirmed job — no hard feelings. We'll move to the next contractor.
     </p>
   </div>
 
@@ -648,7 +645,7 @@
       renderJobView();
     } catch (e) {
       showToast('Payment failed. Try again.', 'error');
-      btn.disabled = false; btn.textContent = 'Pay $10 and unlock address';
+      btn.disabled = false; btn.textContent = 'Pay $20 and unlock address';
     }
   }
 
