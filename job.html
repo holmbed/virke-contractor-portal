@@ -557,18 +557,7 @@
     setTimeout(function() { t.classList.remove('show'); }, 3000);
   }
 
-  function setStatus(status) {
-    var badge = document.getElementById('statusBadge');
-    var map = {
-      pending: ['badge-pending', 'Pending'],
-      contractor_confirmed: ['badge-confirmed', 'Confirmed'],
-      completed: ['badge-confirmed', 'Completed'],
-      cancelled: ['badge-cancelled', 'Cancelled'],
-    };
-    var config = map[status] || ['badge-pending', status];
-    badge.className = 'badge ' + config[0];
-    badge.querySelector('span').textContent = config[1];
-  }
+  function setStatus(status) {}
 
   function formatDate(iso) {
     if (!iso) return '—';
