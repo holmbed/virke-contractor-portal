@@ -593,7 +593,7 @@
       jobData = await res.json();
       var city = jobData.city || extractCity(jobData.address);
       document.getElementById('previewCity').textContent = city;
-      document.getElementById('blurredAddress').textContent = jobData.address || 'Seattle, WA';
+      document.getElementById('blurredAddress').textContent = '••••••••••••••••';
       show('loginPhoneView');
     } catch (e) { show('errorView'); }
   }
