@@ -256,15 +256,6 @@
 
     <div class="info-note">Mark the job complete below once the work is done. The customer will be notified.</div>
 
-    <div class="fund-form" id="fundForm">
-      <div class="card-title" style="padding:0 0 14px">Request additional funds</div>
-      <label>Amount (USD)</label>
-      <input type="number" id="fundAmount" placeholder="e.g. 75" min="1" />
-      <label>Reason</label>
-      <textarea id="fundReason" placeholder="e.g. Replacement part needed — faucet cartridge $65"></textarea>
-      <button class="btn-submit" onclick="submitFundRequest()">Submit request</button>
-      <button class="btn-close" onclick="toggleFundForm()">Cancel</button>
-    </div>
 
     <div class="success-wrap" id="successView">
       <div class="success-icon">✓</div>
@@ -274,7 +265,6 @@
 
     <div class="btn-group" id="actionButtons">
       <button class="btn-complete" onclick="markComplete()">Mark job complete</button>
-      <button class="btn-fund" onclick="toggleFundForm()">Request additional funds</button>
       <button class="btn-cancel" onclick="cancelJob()">Can't do this job</button>
     </div>
 
